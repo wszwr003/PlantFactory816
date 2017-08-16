@@ -24,7 +24,7 @@ public class ChartNowDataPanel2 extends ChartPanel implements Runnable
     private int id; 
     private String chartContent;  
     public ChartNowDataPanel2(int id,String chartContent,String title,String yaxisName)
-    {
+    {   //123123
         super(createChart(chartContent,title,yaxisName));
         this.setLayout(null);
         this.id = id;
