@@ -45,7 +45,7 @@ public class TimerMinute {
 				}
                 System.out.println("send get Video Node"+node+":" + getCurrentTime());
                 PCAsServer.zhen_Video[3]=(char)node;
-                PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video);    //视频采集指令
+                //PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video);    //视频采集指令
               }
         };
         Timer timer = new Timer();
@@ -92,9 +92,7 @@ public class TimerMinute {
             	
                 System.out.println("get Data Node"+node+":" + getCurrentTime());
                 PCAsServer.zhen_Data[3]=(char)node;
-                
-                PCAsServer.sendtothread(node,"", PCAsServer.zhen_Data);    //数据采集指令
-                
+                	PCAsServer.sendtothread(node,"", PCAsServer.zhen_Data);    //数据采集指令
               }
         };
         Timer timer = new Timer();

@@ -177,10 +177,11 @@ public class NodeJPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				PCAsServer.zhen_Video[3]=(char)id;
                 PCAsServer.sendtothread(id,"", PCAsServer.zhen_Video);    //视频采集指令
+                
                 videobutton =true;
 			}
 		});	
-		video_jButton.setEnabled(false);
+		//video_jButton.setEnabled(false);
 		
 		this.add(temp_jLabel);
 		this.add(humi_jLabel);

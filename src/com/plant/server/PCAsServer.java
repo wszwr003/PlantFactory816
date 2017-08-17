@@ -276,58 +276,7 @@ public class PCAsServer  {
 									readBuffer[n]=0;
 							}            			    
 							zhenshu = 0;
-
-//							PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video2);
 						}
-//	                	else if(readBuffer[0]=='&'&&readBuffer[1]=='!'&&readBuffer[4]==0x06) {
-//            			    zhenshuNow = readBuffer[5]*1000+readBuffer[6]*10+readBuffer[7];
-////							int[] temp=new int[20];
-////							for (int j = 0; j < temp.length; j++) {
-////								temp[j]=readBuffer[j]&0xff;
-////							}
-////            			    System.out.println(Arrays.toString(temp));
-//            			    System.out.println("video datas£º"+zhenshuNow);
-//            			    video =false;
-//            			    byte[] zhen = new byte[zhenshuNow];
-//            			    for (int n= 8; n < zhenshuNow+8; n++) {
-//            			    	zhen[n-8]=readBuffer[n];
-//								//readBuffer[n]=0;
-//							}
-//            			    
-//							new PictureCov(zhen,"src\\video\\cameranode"+returnAddr(this)+".jpg").start();
-//							if (NodeJPanel.videobutton) {
-//								new PictureCov(zhen,"picture\\takenode"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
-//								NodeJPanel.videobutton = false;
-//							}else 
-//							{
-//								new PictureCov(zhen,"picture\\node"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
-//							}
-////							PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video2);
-//						}
-//	                	else if(readBuffer[0]=='&'&&readBuffer[1]=='!'&&readBuffer[4]==0x06) {
-//            			    zhenshuNow = readBuffer[5];
-//            			    for (int n= 6; n < 1006; n++) {
-//								readBufferV[zhenshuNow][n-6]=readBuffer[n];
-//								readBuffer[n]=0;
-//							}
-//                			if (zhenshuNow == zhenshu-1) {
-//                				byte[] zhen = new byte[zhenshu*1000];
-//								for (int m = 0; m < zhenshu; m++) {
-//									for (int n= 0; n < 1000; n++) {
-//										zhen[m*1000+n]=readBufferV[m][n];
-//									}
-//									//System.out.println(Arrays.toString(readBufferV[m]));
-//								}
-//								new PictureCov(zhen,"src\\video\\cameranode"+returnAddr(this)+".jpg").start();
-//								if (NodeJPanel.videobutton) {
-//									new PictureCov(zhen,"picture\\takenode"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
-//									NodeJPanel.videobutton = false;
-//								}else 
-//								{
-//									new PictureCov(zhen,"picture\\node"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
-//								}
-//							}
-//                      }
 	                }
 	            } 
 	            catch (Exception ex) {
