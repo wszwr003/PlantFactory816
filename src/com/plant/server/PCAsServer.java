@@ -1,9 +1,7 @@
 package com.plant.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.ServerSocket;
@@ -11,14 +9,10 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
-
-import com.plant.frame.MainFrame;
 import com.plant.frame.NodeJPanel;
 import com.plant.util.ImageInput;
 import com.plant.util.TimerMinute;
-
 
 public class PCAsServer  {
 	public static byte[] zhen = new byte[60000];
@@ -59,6 +53,7 @@ public class PCAsServer  {
 //	public Vector<ManageClient> clients = new Vector<ManageClient>();
 
 	public static Map<Integer, ManageClient> clients = new HashMap<Integer, ManageClient>();
+	
 	public PCAsServer() throws Exception{
 		
 		server = new ServerSocket(8899, 10);
@@ -107,8 +102,7 @@ public class PCAsServer  {
         	  }
         }
 		return i;  
-    }
-    
+    }   
     
     public double[] receiveFrame(byte[] frame)
     {
@@ -148,7 +142,6 @@ public class PCAsServer  {
   			
   			return temp;
     }
-
 	
 	class ManageClient extends Thread {
 
@@ -164,8 +157,7 @@ public class PCAsServer  {
 	        public synchronized void start(Socket client) {
 	        super.start();
 	        }
-	        public ManageClient(Socket client) throws IOException {
-	        	    
+	        public ManageClient(Socket client) throws IOException {  	    
 	        	    this.client = client;
 	            	input = client.getInputStream();
 					output = new PrintWriter(client.getOutputStream(), true);
@@ -177,8 +169,6 @@ public class PCAsServer  {
 			            	System.out.println("addr="+addr[2]);
 			            	zhen_Conn[3]=(char)addr[2];
 			            	PCAsServer.sendtothread(addr[2],"asd", PCAsServer.zhen_Conn);
-			            	PCAsServer.sendtothread(addr[2],"asd", PCAsServer.zhen_Conn);
-			            	PCAsServer.sendtothread(addr[2],"asd", PCAsServer.zhen_Conn);
 			            	node=addr[2];
 			            	break;
 		            	}
@@ -187,9 +177,7 @@ public class PCAsServer  {
 
 	        
 	        public void run() {
-//	        	boolean video = false;
 	            double[]  buffer = new double[4];
-//	            byte[] bt ;
 	            
 	            tm.startGetVideo(node,buffer,client);
 	            tm.startTimerBeat(node,buffer,client,input,output);
@@ -197,13 +185,6 @@ public class PCAsServer  {
 	            tm.startTimerDisplayData(node,buffer,client);
 	            try {  	
 	            	int zhenshu= 0;
-//	            	while(true) {
-//	            		Thread.sleep(5000);
-//	            		clients.remove(node);
-//                		input.close();
-//        			    output.close();
-//        			    client.close();
-//	            	}
 	                while (true) {
 	                	if (input.available()<=0) {		
 							continue;
@@ -211,8 +192,6 @@ public class PCAsServer  {
 							readBuffer = new byte[20];
 							input.read(readBuffer);
 						}else if (video ==true){
-//							Thread.sleep(15000);
-//							input.read(readBuffer,0,zhenshu+13);
 							if(i==zhenshu/1024) {
 								input.read(readBuffer,i*1024,zhenshu%1024);
 								Thread.sleep(50);
