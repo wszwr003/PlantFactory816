@@ -14,10 +14,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 import org.jfree.chart.ChartPanel;
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.TimeSeries;
 /*
  * 实时采集数据界面Frame
  */
 public class ChartNowFrame extends JFrame{
+	public TimeSeries timeSeries = new TimeSeries("",Millisecond.class);
 	public ChartNowFrame(int id,String chartContent,String title,String yaxisName) {
 		try {
 			UIManager.setLookAndFeel(MainFrame.look);
@@ -37,7 +40,7 @@ public class ChartNowFrame extends JFrame{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);//exit on close
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);//exit on close
 		setTitle(title+"_Node_"+id);
-	    ChartNowDataPanel cp = new ChartNowDataPanel(id,chartContent, title, yaxisName);
+	    ChartNowDataPanel cp = new ChartNowDataPanel(id,chartContent, title, yaxisName,timeSeries);
 		 this.add(cp);
 		 Thread cpThread= new Thread(cp);
 		 cpThread.start();

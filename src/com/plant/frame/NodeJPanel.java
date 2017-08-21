@@ -110,7 +110,7 @@ public class NodeJPanel extends JPanel {
 		humi_jTextField.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("mouseClicked,humi_jTextField");
-				new ChartNowFrame2(id,"2","实时湿度","%");
+				new ChartNowFrame(id,"2","实时湿度","%");
 			}
 		});
 		
@@ -118,7 +118,7 @@ public class NodeJPanel extends JPanel {
 		light_jTextField.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("mouseClicked,light_jTextField");
-				new ChartNowFrame3(id,"3","实时光照强度","umol/m2/s");
+				new ChartNowFrame(id,"3","实时光照强度","umol/m2/s");
 			}
 		});
 		
@@ -126,7 +126,7 @@ public class NodeJPanel extends JPanel {
 		co2_jTextField.addMouseListener(new MouseAdapter(){
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("mouseClicked,co2_jTextField");
-				new ChartNowFrame4(id,"4","实时二氧化碳浓度","ppm");
+				new ChartNowFrame(id,"4","实时二氧化碳浓度","ppm");
 			}
 		});
 		
@@ -135,7 +135,6 @@ public class NodeJPanel extends JPanel {
 //				PCAsServer.sendtothread(id,"asd", PCAsServer.zhen_RelayOn);
 				PCAsServer.relayControl(id,(char)0x01,(char)0x02,(char)0x02);
 				tempstate_jLabel2.setIcon(new ImageIcon(PlantFactory.class.getResource("/images/指示灯open.png")));
-				
 			}
 		});	
 		
@@ -151,7 +150,8 @@ public class NodeJPanel extends JPanel {
 				PCAsServer.relayControl(id,(char)0x02,(char)0x02,(char)0x01);
 				feng_jLabel2.setIcon(new ImageIcon(PlantFactory.class.getResource("/images/指示灯open.png")));
 			}
-		});	
+		});
+		
 		temp_jButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				PCAsServer.sendtothread(id,"asd", PCAsServer.zhen_RelayOn);
@@ -177,7 +177,6 @@ public class NodeJPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				PCAsServer.zhen_Video[3]=(char)id;
                 PCAsServer.sendtothread(id,"", PCAsServer.zhen_Video);    //视频采集指令
-                
                 videobutton =true;
 			}
 		});	

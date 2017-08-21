@@ -18,14 +18,14 @@ import org.jfree.data.time.TimeSeriesCollection;
 public class ChartNowDataPanel extends ChartPanel implements Runnable
 {
 
-    private static TimeSeries timeSeries;
-    private long value=0;
+    private  TimeSeries timeSeries;
     private JLabel jlabel;
     private int id; 
     private String chartContent;  
-    public ChartNowDataPanel(int id,String chartContent,String title,String yaxisName)
+    public ChartNowDataPanel(int id,String chartContent,String title,String yaxisName,TimeSeries timeSeries)
     {
-        super(createChart(chartContent,title,yaxisName));
+        super(createChart(chartContent,title,yaxisName,timeSeries));
+        this.timeSeries = timeSeries;
         this.setLayout(null);
         this.id = id;
         this.chartContent = chartContent;
@@ -37,9 +37,9 @@ public class ChartNowDataPanel extends ChartPanel implements Runnable
     }  
       
 
-	private static JFreeChart createChart(String chartContent,String title,String yaxisName){
+	private static JFreeChart createChart(String chartContent,String title,String yaxisName,TimeSeries timeSeries){
         //创建时序图对象
-    	timeSeries = new TimeSeries(chartContent,Millisecond.class);
+		//timeSeries = new TimeSeries(chartContent,Millisecond.class);
        	TimeSeriesCollection timeseriescollection = new TimeSeriesCollection(timeSeries);
        	JFreeChart jfreechart = ChartFactory.createTimeSeriesChart(title,"时间(秒)",yaxisName,timeseriescollection,false,true,false);  
        	XYPlot xyplot = jfreechart.getXYPlot();

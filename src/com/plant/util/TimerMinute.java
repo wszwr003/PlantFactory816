@@ -16,6 +16,7 @@ import com.plant.server.PCAsServer;
 
 public class TimerMinute {
 	public int timebeat = 0;
+	public boolean videoFlag = false;
 	public TimerMinute() {
 		System.out.println("task start:" + getCurrentTime());
 	}
@@ -43,9 +44,11 @@ public class TimerMinute {
             	if (client.isClosed()) {
 					this.cancel();
 				}
-                System.out.println("send get Video Node"+node+":" + getCurrentTime());
-                PCAsServer.zhen_Video[3]=(char)node;
-                //PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video);    //视频采集指令
+            	else {
+            		System.out.println("send get Video Node"+node+":" + getCurrentTime());
+            		PCAsServer.zhen_Video[3]=(char)node;
+            		PCAsServer.sendtothread(node,"", PCAsServer.zhen_Video);    //视频采集指令
+            	}
               }
         };
         Timer timer = new Timer();
@@ -62,18 +65,20 @@ public class TimerMinute {
             	if (client.isClosed()) {
 					this.cancel();
 				}
-                System.out.println("StoreData Node"+node+":" + getCurrentTime());
-                tmp[0] = "1";
-                tmp[1] = df.format(Long.valueOf(System.currentTimeMillis()));
-                tmp[2] = NodeJPanel.node_SET.get(node-1).temp_jTextField.getText();
-                tmp[3] = NodeJPanel.node_SET.get(node-1).humi_jTextField.getText();
-                tmp[4] = NodeJPanel.node_SET.get(node-1).light_jTextField.getText();
-                tmp[5] = NodeJPanel.node_SET.get(node-1).co2_jTextField.getText();
-                try {//		
-					NodeJPanel.node_SET.get(node-1).ePoi.writeLocalExcel("Node_"+node, tmp);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}	
+            	else {
+	                System.out.println("StoreData Node"+node+":" + getCurrentTime());
+	                tmp[0] = "1";
+	                tmp[1] = df.format(Long.valueOf(System.currentTimeMillis()));
+	                tmp[2] = NodeJPanel.node_SET.get(node-1).temp_jTextField.getText();
+	                tmp[3] = NodeJPanel.node_SET.get(node-1).humi_jTextField.getText();
+	                tmp[4] = NodeJPanel.node_SET.get(node-1).light_jTextField.getText();
+	                tmp[5] = NodeJPanel.node_SET.get(node-1).co2_jTextField.getText();
+	                try {//		
+						NodeJPanel.node_SET.get(node-1).ePoi.writeLocalExcel("Node_"+node, tmp);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+            	}
               }
         };
         Timer timer = new Timer();
@@ -88,12 +93,15 @@ public class TimerMinute {
             public void run() {
             	if (client.isClosed()) {
             		this.cancel();
+            	}else if(videoFlag == true) {
+            		;
             	}
-            	
-                System.out.println("get Data Node"+node+":" + getCurrentTime());
-                PCAsServer.zhen_Data[3]=(char)node;
+            	else {
+            		System.out.println("get Data Node"+node+":" + getCurrentTime());
+            		PCAsServer.zhen_Data[3]=(char)node;
                 	PCAsServer.sendtothread(node,"", PCAsServer.zhen_Data);    //数据采集指令
-              }
+            	}
+            }
         };
         Timer timer = new Timer();
         timer.schedule(task,0,1000*2);
@@ -135,7 +143,7 @@ public class TimerMinute {
     private static Date buildTime2(int node) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE,1);
-        calendar.set(Calendar.SECOND,15+10*node);
+        calendar.set(Calendar.SECOND,0+15*node);
         Date time = calendar.getTime();
         return time;
     }

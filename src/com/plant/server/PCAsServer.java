@@ -15,7 +15,6 @@ import com.plant.util.ImageInput;
 import com.plant.util.TimerMinute;
 
 public class PCAsServer  {
-	public static byte[] zhen = new byte[60000];
 	public static final byte[] frame_HEAD = { 0x26, 0x21 };
 	public static final byte[] frame_ADDRESS_PC = {0x00};
 	public static final byte[] frame_ADDRESS_Node_1 = { 0x01 };
@@ -47,7 +46,6 @@ public class PCAsServer  {
 	public static  char[] zhen_Video2 = { 0x26,0x21,0x00,0x01,0x07,0x00,0xff,0xff,0x7c,0x23 };
 	public static  char[] zhen_Data = { 0x26,0x21,0x00,0x01,0x02,0x04,0xff,0xff,0xff,0xff,0xff,0xff,0x7c,0x23 };
 	public static  char[] zhen_Data2 = { 0x26,0x21,0x00,0x01,0x08,0x04,0xff,0xff,0xff,0xff,0xff,0xff,0x7c,0x23 };
-	int i=0;
 	public ServerSocket server;
 	public Socket client;
 //	public Vector<ManageClient> clients = new Vector<ManageClient>();
@@ -59,15 +57,12 @@ public class PCAsServer  {
 		server = new ServerSocket(8899, 10);
 		server.setReceiveBufferSize(60000);
 		client = null;
-//		new ImageInput();
-		System.out.println("PlantFactory is running!");
-		//new GetData().start();
+		System.out.println("---PlantFactory is running!---");
 		while (true) {
-			System.out.println("PlantFactory is running!");
+			System.out.println("---Waiting another client...---");
 			client = server.accept();
             ManageClient c = new ManageClient(client);
             c.start();
-
 		}
 	}
 	
@@ -146,11 +141,11 @@ public class PCAsServer  {
 	class ManageClient extends Thread {
 
 	        private Socket client;
+	    	public byte[] zhen = new byte[60000];
 	    	public byte[] readBuffer=new byte[60000];
 			String gotthread = "";
 	        InputStream input;
 	        PrintWriter output;
-        	boolean video = false;
 	        TimerMinute tm = new TimerMinute();
 	        int node;
 	        byte[] addr = new byte[20];
@@ -178,7 +173,8 @@ public class PCAsServer  {
 	        
 	        public void run() {
 	            double[]  buffer = new double[4];
-	            
+	            boolean video = false;
+	        	int i=0;
 	            tm.startGetVideo(node,buffer,client);
 	            tm.startTimerBeat(node,buffer,client,input,output);
 	            tm.startTimerStoreData(node,buffer,client);
@@ -190,7 +186,8 @@ public class PCAsServer  {
 							continue;
 						}else if (video ==false){
 							readBuffer = new byte[20];
-							input.read(readBuffer);
+							input.read(readBuffer,0,20);
+							Thread.sleep(10);
 						}else if (video ==true){
 							if(i==zhenshu/1024) {
 								input.read(readBuffer,i*1024,zhenshu%1024);
@@ -229,17 +226,15 @@ public class PCAsServer  {
 		    							Thread.sleep(10);
 		                			    video =true;
 		                			    i=0;
-//		                			    System.out.println(Arrays.toString(readBuffer));
 		                			    System.out.println(zhenshu);
+		                			   
 		                }
 	                	else if(readBuffer[0]==-1&&readBuffer[1]==-40) {
-	                		System.out.println("ASDASD");
-	                		video =false;
             			    byte[] zhen = new byte[zhenshu];
             			    for (int n= 0; n < zhenshu; n++) {
             			    	zhen[n]=readBuffer[n];
 							}
-            			   
+            			    video =false;
             			    //System.out.println(Arrays.toString(readBuffer));
 //            			    System.out.println(zhen[0]);System.out.println(zhen[0]);
 //            			    System.out.println(zhen[zhenshu-2]);System.out.println(zhen[zhenshu-1]);
