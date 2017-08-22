@@ -50,13 +50,13 @@ public class NodeJPanel extends JPanel {
 	public JLabel co2valve_jLabel2 = new JLabel(new ImageIcon(PlantFactory.class.getResource("/images/指示灯black.png")));
 	public JLabel feng_jLabel2 = new JLabel(new ImageIcon(PlantFactory.class.getResource("/images/指示灯black.png")));
 
-	JButton temp_jButton = new JButton("开始光照");
-	JButton co2_jButton = new JButton("通入CO2");
-	JButton feng_jButton = new JButton("新风开");
-	JButton temp_jButton2 = new JButton("关闭光照");
-	JButton co2_jButton2 = new JButton("关闭CO2");
-	JButton feng_jButton2 = new JButton("新风关");
-	JButton video_jButton = new JButton("拍照");
+	public JButton temp_jButton = new JButton("开始光照");
+	public JButton co2_jButton = new JButton("通入CO2");
+	public JButton feng_jButton = new JButton("新风开");
+	public JButton temp_jButton2 = new JButton("关闭光照");
+	public JButton co2_jButton2 = new JButton("关闭CO2");
+	public JButton feng_jButton2 = new JButton("新风关");
+	public JButton video_jButton = new JButton("拍照");
 	public static boolean videobutton = false;
 	
 	
@@ -67,7 +67,7 @@ public class NodeJPanel extends JPanel {
 		this.setOpaque(false);
 		this.setBorder(BorderFactory.createTitledBorder(node));
 		
-		VideoJPanel video = new VideoJPanel(node);
+		VideoJPanel video = new VideoJPanel(node,id);
 		(new Thread(video)).start();
 		
 		temp_jLabel.setBounds(10+330, 20, 70, 30);
@@ -97,6 +97,14 @@ public class NodeJPanel extends JPanel {
 		co2_jButton2.setBounds(120, 300, 100, 30);
 		feng_jButton2.setBounds(230, 300, 100, 30);
 		video_jButton.setBounds(340, 300, 100, 30);
+		
+		temp_jButton.setEnabled(false);
+		co2_jButton.setEnabled(false);
+		feng_jButton.setEnabled(false);
+		temp_jButton2.setEnabled(false);
+		co2_jButton2.setEnabled(false);
+		feng_jButton2.setEnabled(false);
+		video_jButton.setEnabled(false);
 		
 		temp_jTextField.setEditable(false);
 		temp_jTextField.addMouseListener(new MouseAdapter(){
@@ -175,9 +183,13 @@ public class NodeJPanel extends JPanel {
 		});	
 		video_jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PCAsServer.zhen_Video[3]=(char)id;
-                PCAsServer.sendtothread(id,"", PCAsServer.zhen_Video);    //视频采集指令
-                videobutton =true;
+				if(videobutton ==false) {
+					video_jButton.setEnabled(false);
+					video_jButton.setText("图像采集中");
+					PCAsServer.zhen_Video[3]=(char)id;
+	                PCAsServer.sendtothread(id,"", PCAsServer.zhen_Video);    //视频采集指令
+	                videobutton =true;
+				}
 			}
 		});	
 		//video_jButton.setEnabled(false);

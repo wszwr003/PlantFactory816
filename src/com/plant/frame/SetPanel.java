@@ -37,6 +37,7 @@ import sun.audio.AudioStream;
 
 public class SetPanel extends JPanel{
 	boolean warnFlag = false;
+	int node;
 	JSpinner spFrom;
 	JSpinner spTo;
 	JSpinner spFromFeng;
@@ -59,14 +60,15 @@ public class SetPanel extends JPanel{
 	JLabel alarmJ;
 	JLabel alarmJ2;
 	final JFrame frame = new JFrame("JOptionPane");
-	public SetPanel() {
+	public SetPanel(int node) {
 		//光照设置----灯开关
 		//温度控制----空调系统
 		//湿度控制----新风系统
 		//二氧化碳浓度设置----电磁阀门
 		
 		//二氧化碳报警阈值设定
-		//温度报警阈值设定
+		//温度报警阈值设定\
+		this.node=node;
 		this.setLayout(null);
 		this.setVisible(true);
 	
@@ -83,14 +85,11 @@ public class SetPanel extends JPanel{
 		dataSet.setLayout(null);
 		add(dataSet);
 		
-		
-		
 		JPanel dataFeng = new JPanel();
 		dataFeng.setBorder(BorderFactory.createTitledBorder("新风设置"));
 		dataFeng.setBounds(0, 150, 700, 150);
 		dataFeng.setLayout(null);
 		add(dataFeng);
-	
 		
 		JPanel dataAlarm = new JPanel();
 		dataAlarm.setBorder(BorderFactory.createTitledBorder("报警设置"));

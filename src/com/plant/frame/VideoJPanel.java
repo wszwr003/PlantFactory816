@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 public class VideoJPanel extends JPanel implements Runnable{
 //	 boolean flag =true;
 	 String node;
-	 public VideoJPanel(String node){
+	 int id;
+	 public VideoJPanel(String node,int id){
 //	 this.setSize(500, 400);
 	 this.setBorder(BorderFactory.createEtchedBorder());
 	 this.node =node;
+	 this.id =id;
 	 }
 	 @Override//这个方法是用来画Panel组件的
 	 protected void paintComponent(Graphics g) {
@@ -32,11 +34,22 @@ public class VideoJPanel extends JPanel implements Runnable{
 //				g2.drawImage(img, 0, 0, 320, 240,null);
 //				flag =false;
 //				}else {
-					BufferedImage img=ImageIO.read(new File("src\\video\\camera"+node+".jpg"));
-//					BufferedImage img=ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\back.jpg"));
-//					BufferedImage img=ImageIO.read(new File("images/plant.jpg"));
-//					BufferedImage img=ImageIO.read(new File(this.getClass().getResource("images/plant.jpg").getPath()));
-					g2.drawImage(img, 0, 0, 320, 240,null);
+				    if(NodeJPanel.node_SET.get((int)id-1).video_jButton.isEnabled())
+				    {
+						BufferedImage img=ImageIO.read(new File("src\\video\\camera"+node+".jpg"));
+	//					BufferedImage img=ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\back.jpg"));
+	//					BufferedImage img=ImageIO.read(new File("images/plant.jpg"));
+	//					BufferedImage img=ImageIO.read(new File(this.getClass().getResource("images/plant.jpg").getPath()));
+					    g2.drawImage(img, 0, 0, 320, 240,null);
+				    }
+				    else
+				    {
+						BufferedImage img=ImageIO.read(new File("src\\video\\camera.jpg"));
+	//					BufferedImage img=ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\back.jpg"));
+	//					BufferedImage img=ImageIO.read(new File("images/plant.jpg"));
+	//					BufferedImage img=ImageIO.read(new File(this.getClass().getResource("images/plant.jpg").getPath()));
+					    g2.drawImage(img, 0, 0, 320, 240,null);
+				    }
 //				}
 			} catch (IOException e) {
 //				try {

@@ -165,6 +165,13 @@ public class PCAsServer  {
 			            	zhen_Conn[3]=(char)addr[2];
 			            	PCAsServer.sendtothread(addr[2],"asd", PCAsServer.zhen_Conn);
 			            	node=addr[2];
+			            	NodeJPanel.node_SET.get((int)node-1).video_jButton.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).co2_jButton.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).co2_jButton2.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).feng_jButton.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).feng_jButton2.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).temp_jButton.setEnabled(true);
+			            	NodeJPanel.node_SET.get((int)node-1).temp_jButton2.setEnabled(true);
 			            	break;
 		            	}
 		            }
@@ -204,6 +211,10 @@ public class PCAsServer  {
 								System.out.println(i);
 								continue;
 							}
+							NodeJPanel.node_SET.get((int)buffer[0]-1).video_jButton.setEnabled(true);
+							NodeJPanel.node_SET.get((int)buffer[0]-1).video_jButton.setText("拍照");
+							NodeJPanel.videobutton = false;   //现用作按键之间防冲突指示 
+							video =false;       //放在此处，如果放在后面接受位置则如进入接受语句玖无法Flase
 							System.out.println(readBuffer[0]);System.out.println(readBuffer[1]);
 							System.out.println(readBuffer[zhenshu-2]);System.out.println(readBuffer[zhenshu-1]);
 						}
@@ -229,12 +240,12 @@ public class PCAsServer  {
 		                			    System.out.println(zhenshu);
 		                			   
 		                }
-	                	else if(readBuffer[0]==-1&&readBuffer[1]==-40) {
+	                	else if(readBuffer[0]==-1&&readBuffer[1]==-40&&((readBuffer[zhenshu-2]==-39&&readBuffer[zhenshu-1]==0)||(readBuffer[zhenshu-2]==-1&&readBuffer[zhenshu-1]==-39))) {
             			    byte[] zhen = new byte[zhenshu];
             			    for (int n= 0; n < zhenshu; n++) {
             			    	zhen[n]=readBuffer[n];
 							}
-            			    video =false;
+            			    
             			    //System.out.println(Arrays.toString(readBuffer));
 //            			    System.out.println(zhen[0]);System.out.println(zhen[0]);
 //            			    System.out.println(zhen[zhenshu-2]);System.out.println(zhen[zhenshu-1]);

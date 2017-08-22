@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.ClientInfoStatus;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -116,10 +117,18 @@ public class TimerMinute {
             	}
             	if (20==timebeat) {
 					try {
+						PCAsServer.clients.remove(node);
 						input.close();
 						output.close();
 						client.close();
 						this.cancel();
+						NodeJPanel.node_SET.get((int)node-1).video_jButton.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).co2_jButton.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).co2_jButton2.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).feng_jButton.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).feng_jButton2.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).temp_jButton.setEnabled(false);
+		            	NodeJPanel.node_SET.get((int)node-1).temp_jButton2.setEnabled(false);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
