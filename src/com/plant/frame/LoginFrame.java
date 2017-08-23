@@ -18,6 +18,7 @@ import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.border.EmptyBorder;
 
 import com.plant.server.PCAsServer;
 
@@ -33,15 +34,15 @@ public class LoginFrame extends JFrame{
 		}
 		
 //		setPreferredSize(new Dimension(500	, 330));
-		setPreferredSize(new Dimension(500	, 330));
+		setPreferredSize(new Dimension(591	, 394));
 		setUndecorated(true);
 //		setSize(500, 330);
-		setSize(500, 330);
+		setSize(591, 394);
 		setLocationRelativeTo(null);			//locate in center
 		setLayout(null);
 		
 //		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\植物工廠01.png").getImage());
-		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\ui823.jpg").getImage());
+		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\ui822-2.png").getImage());
 		jpb.setOpaque(false);
 		jpb.setForeground(Color.WHITE);
 		JLabel jb =new JLabel("植物生长环境控制系统");
@@ -56,30 +57,45 @@ public class LoginFrame extends JFrame{
 		jb1.setBounds(280, 0, 400, 50);
 		//jb2.setBounds(200, 0, 54, 54);
 		
-		add(jb);
-		add(jb1);
+//		add(jb);
+//		add(jb1);
 		//add(jb2);
-		String count[] ={"wszwr003","licaokeji001"};
-		JComboBox jcb = new JComboBox(count);
-		jcb.setBounds(160, 140, 160, 30);
-		add(jcb);
-		JPasswordField jf = new JPasswordField("123456");
-		jf.setBounds(160, 173, 160, 30);
+//		String count[] ={"wszwr003","licaokeji001"};
+//		JComboBox jcb = new JComboBox(count);
+//		jcb.setBounds(160, 140, 160, 30);
+//		add(jcb);
+		
+		JTextField jt = new JTextField("wszwr003",10);
+		jt.setBorder(new EmptyBorder(0, 0, 0, 0));
+		jt.setBackground(new Color(145, 199, 106));
+		jt.setFocusCycleRoot(false);
+		jt.setBounds(160, 173, 160, 30);
+		add(jt);
+		
+		JPasswordField jf = new JPasswordField("123456",10);
+		jf.setBorder(new EmptyBorder(0, 0, 0, 0));
+		jf.setBackground(new Color(145, 199, 106));
+		jf.setBounds(160, 223, 160, 30);
 		add(jf);
 		
 		JButton jbutton1 = new JButton("登陆");
 		jbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(((String)jcb.getSelectedItem()).equals("wszwr003")&&jf.getText().equals("123456")){
-					mf.setVisible(true);    	 
-					dispose();
-				}else{
+//				if(((String)jcb.getSelectedItem()).equals("wszwr003")&&jf.getText().equals("123456")){
+//					mf.setVisible(true);    	 
+//					dispose();
+//				}
+				if(((String)jt.getText()).equals("wszwr003")&&jf.getText().equals("123456")){
+				mf.setVisible(true);    	 
+				dispose();
+				}
+				else{
 					JOptionPane.showMessageDialog(null,"账号或密码错误", "错误",  JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		});
-		jbutton1.setBounds(120, 220, 80, 40);
+		jbutton1.setBounds(170, 270, 80, 40);
 		add(jbutton1);
 		JButton jbutton2 = new JButton("关闭");
 		jbutton2.addActionListener(new ActionListener() {
@@ -91,7 +107,7 @@ public class LoginFrame extends JFrame{
 				
 			}
 		});
-		jbutton2.setBounds(270, 220, 80, 40);
+		jbutton2.setBounds(320, 270, 80, 40);
 		add(jbutton2);
 		
 		add(jpb);
