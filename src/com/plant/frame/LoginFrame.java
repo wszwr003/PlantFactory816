@@ -42,7 +42,7 @@ public class LoginFrame extends JFrame{
 		setLayout(null);
 		
 //		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\植物工廠01.png").getImage());
-		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\ui822-2.png").getImage());
+		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\822-2.png").getImage());
 		jpb.setOpaque(false);
 		jpb.setForeground(Color.WHITE);
 		JLabel jb =new JLabel("植物生长环境控制系统");
@@ -68,14 +68,18 @@ public class LoginFrame extends JFrame{
 		JTextField jt = new JTextField("wszwr003",10);
 		jt.setBorder(new EmptyBorder(0, 0, 0, 0));
 		jt.setBackground(new Color(145, 199, 106));
+		jt.setForeground(new Color(251, 251, 252));
 		jt.setFocusCycleRoot(false);
-		jt.setBounds(160, 173, 160, 30);
+		jt.setFont(new Font(Font.DIALOG,Font.PLAIN, 19));
+		jt.setBounds(250, 170, 160, 30);
 		add(jt);
 		
 		JPasswordField jf = new JPasswordField("123456",10);
 		jf.setBorder(new EmptyBorder(0, 0, 0, 0));
+		jf.setFont(new Font(Font.DIALOG,Font.PLAIN, 19));
+		jf.setForeground(new Color(251, 251, 252));
 		jf.setBackground(new Color(145, 199, 106));
-		jf.setBounds(160, 223, 160, 30);
+		jf.setBounds(250, 206, 160, 30);
 		add(jf);
 		
 		JButton jbutton1 = new JButton("登陆");
