@@ -12,7 +12,11 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+
 import com.plant.frame.NodeJPanel;
+import com.plant.frame.PlantFactory;
 import com.plant.server.PCAsServer;
 
 public class TimerMinute {
@@ -36,6 +40,11 @@ public class TimerMinute {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(date);
     }
+	public static String getCurrentTime4() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-HH-mm-ss");
+        return sdf.format(date);
+    }
 	
     public  void startGetVideo(int node,double buffer[],Socket client){
     	SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm:ss");
@@ -53,13 +62,13 @@ public class TimerMinute {
               }
         };
         Timer timer = new Timer();
-        timer.schedule(task,buildTime2(node),1000*60);
+        timer.schedule(task,buildTime2(node),1000*60*5);
       //timer.schedule(task, buildTime(), 1000 * 60 * 60 * 24);
     }
     
     public  void startTimerStoreData(int node,double buffer[],Socket client){
     	String[] tmp = new String[6];
-    	SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm:00");
+    	SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
         TimerTask task = new TimerTask(){
             @Override
             public void run() {
@@ -115,7 +124,7 @@ public class TimerMinute {
             	if (client.isClosed()) {
             		this.cancel();
             	}
-            	if (20==timebeat) {
+            	if (15==timebeat) {
 					try {
 						PCAsServer.clients.remove(node);
 						input.close();
@@ -129,6 +138,16 @@ public class TimerMinute {
 		            	NodeJPanel.node_SET.get((int)node-1).feng_jButton2.setEnabled(false);
 		            	NodeJPanel.node_SET.get((int)node-1).temp_jButton.setEnabled(false);
 		            	NodeJPanel.node_SET.get((int)node-1).temp_jButton2.setEnabled(false);
+		            	
+		            	NodeJPanel.node_SET.get((int)node-1).temp_jTextField.setText("0.0");
+		            	NodeJPanel.node_SET.get((int)node-1).humi_jTextField.setText("0.0");
+		            	NodeJPanel.node_SET.get((int)node-1).light_jTextField.setText("0.0");
+		            	NodeJPanel.node_SET.get((int)node-1).co2_jTextField.setText("0.0");
+		            	
+						NodeJPanel.node_SET.get(node-1).tempstate_jLabel2.setIcon(new ImageIcon(PlantFactory.class.getResource("/images/指示灯black.png")));
+						NodeJPanel.node_SET.get(node-1).feng_jLabel2.setIcon(new ImageIcon(PlantFactory.class.getResource("/images/指示灯black.png")));
+						NodeJPanel.node_SET.get(node-1).co2valve_jLabel2.setIcon(new ImageIcon(PlantFactory.class.getResource("/images/指示灯black.png")));
+						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

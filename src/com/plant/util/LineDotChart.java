@@ -78,7 +78,7 @@ public class LineDotChart{
 		        for (int k = 0; k < dataset.getNumItems(); ++k) {
 		          int increaseMetric = dataset.getNumSets() - i - 1;
 		          //dataset.set(i, j, k,Float.valueOf(data[j]));
-		          System.out.println(data[1][k]);
+		          System.out.println(data[1][j]);
 		          dataset.set(i, j, k,Float.valueOf(data[1][j]));
 		          //dataset.set (i, j, k,(float)100.5);
 		        }

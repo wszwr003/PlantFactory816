@@ -32,13 +32,16 @@ public class LoginFrame extends JFrame{
 			e.printStackTrace();
 		}
 		
+//		setPreferredSize(new Dimension(500	, 330));
 		setPreferredSize(new Dimension(500	, 330));
 		setUndecorated(true);
+//		setSize(500, 330);
 		setSize(500, 330);
 		setLocationRelativeTo(null);			//locate in center
 		setLayout(null);
 		
-		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\植物工廠01.png").getImage());
+//		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\植物工廠01.png").getImage());
+		MyJPanel jpb = new MyJPanel(new ImageIcon("src\\images\\ui823.jpg").getImage());
 		jpb.setOpaque(false);
 		jpb.setForeground(Color.WHITE);
 		JLabel jb =new JLabel("植物生长环境控制系统");

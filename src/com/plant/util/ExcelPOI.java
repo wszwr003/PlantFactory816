@@ -215,7 +215,7 @@ public class ExcelPOI {
 		return data;
 	  }
 	  public String[][] readDataVersion2(JSpinner start,JSpinner end,int Fre,int sensor,int node){
-			SimpleDateFormat sdf=new SimpleDateFormat("MM-dd HH:mm:ss");
+			SimpleDateFormat sdf=new SimpleDateFormat("MM-dd HH:mm");
 			String[][] data;
 			int j=0,k=0,flag =0, flag2=0;
 			int[] getDataFre ={1,5,15,30,60,120,180};
@@ -228,16 +228,11 @@ public class ExcelPOI {
 	            e.printStackTrace();  
 	        }  
 	        sheet = wb.getSheetAt(0);
-			//System.out.println( sheet.getLastRowNum());
-	        //System.out.println(sdf.format(start.getValue()));
-	        //System.out.println(readExcelData(node,2,1));
-			//sdf.format(start.getValue());      //表格查询起始时间string
-			//sdf.format(end.getValue());        //表格查询结束时间string
 			for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 				if (readExcelData(node,i,1).compareTo(sdf.format(start.getValue()))>=0) {
 					flag =1;
 					j=i;
-					System.out.println(j);
+					System.out.println(j);  //j为起始行
 					break;
 				}
 			}
@@ -245,7 +240,7 @@ public class ExcelPOI {
 				if (readExcelData(node,i,1).compareTo(sdf.format(end.getValue()))<=0) {
 					flag2=1;
 					k=i;
-					System.out.println(k);
+					System.out.println(k);  //k为结束行
 					break;
 				}
 				
@@ -257,15 +252,12 @@ public class ExcelPOI {
 				data[1][0]="0";
 				return data;
 			}
-			data = new String[2][(k-j+1)/(getDataFre[Fre])+1];
-			for (int i = 0; i <(k-j+1)/(getDataFre[Fre])+1; i++) {
+			data = new String[2][(k-j+1)/(getDataFre[Fre])];
+			for (int i = 0; i <(k-j+1)/(getDataFre[Fre]); i++) {
 				data[0][i]=readExcelData(node,j+i*getDataFre[Fre],1);  //时间
 				data[1][i]=readExcelData(node,j+i*getDataFre[Fre],sensor);  //数据
 				System.out.println(data[1][i]);  //return ID
-				//System.out.println(sheet.getLastRowNum());
-				//System.out.println(readExcelData(node,j+i,0));  //return ID
 			}
-			//System.out.println(data.length);
 			return data;
 		  }
 	  public String[][] readData2(JSpinner start,JSpinner end,int Fre,int sensor,int node){
@@ -310,7 +302,6 @@ public class ExcelPOI {
 	  
 	  public String readExcelData(int node,int hang,int lie) {  
 	        try {  
-	        	//InputStream is = new FileInputStream("d:\\" + "Node_" + node + ".xls");  
 	        	InputStream is = new FileInputStream("excel\\" + "Node_" + node + ".xls");  
 	        	fs = new POIFSFileSystem(is);  
 	            wb = new HSSFWorkbook(fs);  
@@ -320,11 +311,13 @@ public class ExcelPOI {
 	        sheet = wb.getSheetAt(0);  
 	        row = sheet.getRow(hang);  
 	        // 标题总列数  
-	        int colNum = row.getPhysicalNumberOfCells();  
+//	        int colNum = row.getPhysicalNumberOfCells();  
+	        int colNum = 6;  
+	        
 	        //System.out.println("colNum:" + colNum);  
 	        String[] title = new String[colNum];  
 	        for (int i = 0; i < colNum; i++) {  
-	            title[i] = getStringCellValue(row.getCell((short) i));  
+	            title[i] = getStringCellValue(row.getCell((int) i));  
 	            //title[i] = getCellFormatValue(row.getCell((short) i));  
 	            //System.out.println(title[i]);
 	        }  

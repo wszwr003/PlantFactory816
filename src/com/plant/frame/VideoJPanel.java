@@ -34,7 +34,7 @@ public class VideoJPanel extends JPanel implements Runnable{
 //				g2.drawImage(img, 0, 0, 320, 240,null);
 //				flag =false;
 //				}else {
-				    if(NodeJPanel.node_SET.get((int)id-1).video_jButton.isEnabled())
+				    if(NodeJPanel.node_SET.get((int)id-1).video_jButton.isEnabled()||NodeJPanel.node_SET.get((int)id-1).video_jButton.getText()!="едуу")
 				    {
 						BufferedImage img=ImageIO.read(new File("src\\video\\camera"+node+".jpg"));
 	//					BufferedImage img=ImageIO.read(new File("C:\\Users\\Administrator\\Desktop\\back.jpg"));

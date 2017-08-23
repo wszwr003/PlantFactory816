@@ -55,7 +55,7 @@ public class ChartHistoryDataPanel extends JPanel {
 		model2.setCalendarField(Calendar.WEEK_OF_MONTH);
 		spFrom = new JSpinner(model2);
 		JSpinner.DateEditor editor2 = new JSpinner.DateEditor(
-				spFrom,"MM-dd HH:mm:00");
+				spFrom,"MM-dd HH:mm");
 		spFrom.setEditor(editor2);
 		spFrom.setBounds(10,15,200,40);
 		this.add(spFrom);
@@ -69,7 +69,7 @@ public class ChartHistoryDataPanel extends JPanel {
 		model3.setCalendarField(Calendar.WEEK_OF_MONTH);
 		spTo = new JSpinner(model3);
 		JSpinner.DateEditor editor3 = new JSpinner.DateEditor(
-				spTo, "MM-dd HH:mm:00");
+				spTo, "MM-dd HH:mm");
 		spTo.setEditor(editor3);
 		spTo.setBounds(250, 15, 200, 40);
 		this.add(spTo);
@@ -120,10 +120,9 @@ public class ChartHistoryDataPanel extends JPanel {
 //				sdf.format(spTo.getValue());        //表格查询结束时间string
 //				NodeJPanel.node_SET.get(0).ePoi.readExcelData(1,1,1);//excel查询时间string
 				//String[][] data = NodeJPanel.node_SET.get(0).ePoi.readData(spFrom, spTo,3,getDataKind.getSelectedIndex()+2,getDataNode.getSelectedIndex()+1);
-				String[][] data = NodeJPanel.node_SET.get(0).ePoi.readDataVersion2(spFrom, spTo,getDataFre.getSelectedIndex(),getDataKind.getSelectedIndex()+2,getDataNode.getSelectedIndex()+1);
+				String[][] data = NodeJPanel.node_SET.get(getDataNode.getSelectedIndex()).ePoi.readDataVersion2(spFrom, spTo,getDataFre.getSelectedIndex(),getDataKind.getSelectedIndex()+2,getDataNode.getSelectedIndex()+1);
 //				System.out.println(data[1]);
 				gengxing(data,getDataNode.getSelectedIndex()+1,getDataKind.getSelectedIndex()+1);
-				
 			}
 		});
 		

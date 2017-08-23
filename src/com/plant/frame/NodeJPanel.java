@@ -58,6 +58,7 @@ public class NodeJPanel extends JPanel {
 	public JButton feng_jButton2 = new JButton("新风关");
 	public JButton video_jButton = new JButton("拍照");
 	public static boolean videobutton = false;
+	public static boolean videoSave = false;
 	
 	
 	public NodeJPanel(String node,int id) {
@@ -188,7 +189,8 @@ public class NodeJPanel extends JPanel {
 					video_jButton.setText("图像采集中");
 					PCAsServer.zhen_Video[3]=(char)id;
 	                PCAsServer.sendtothread(id,"", PCAsServer.zhen_Video);    //视频采集指令
-	                videobutton =true;
+	                videobutton = true;
+	                videoSave = true;
 				}
 			}
 		});	

@@ -41,7 +41,7 @@ public class MainFrame extends JFrame{
 		
 		setSize(1366,768);
 		setLocationRelativeTo(null);			//locate in center
-		setResizable(true);						//set cannot resize
+		setResizable(false);						//set cannot resize
 		setDefaultCloseOperation(EXIT_ON_CLOSE);//exit on close
 		
 		initComponents();
@@ -68,9 +68,9 @@ public class MainFrame extends JFrame{
 		jTabbedPane.addTab("数据分析",jPanel2);
 		jPanel2.setLayout(null);
 		
-		SetPanel jPanel3 = new SetPanel(0);
-		jTabbedPane.addTab("系统设置",jPanel3);
-		jPanel3.setLayout(null);
+//		SetPanel jPanel3 = new SetPanel(0);
+//		jTabbedPane.addTab("系统设置",jPanel3);
+//		jPanel3.setLayout(null);
 		
 		SetAllTab jPanel4 = new SetAllTab();
 		jTabbedPane.addTab("系统设置",jPanel4);

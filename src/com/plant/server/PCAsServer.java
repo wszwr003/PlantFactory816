@@ -250,12 +250,12 @@ public class PCAsServer  {
 //            			    System.out.println(zhen[0]);System.out.println(zhen[0]);
 //            			    System.out.println(zhen[zhenshu-2]);System.out.println(zhen[zhenshu-1]);
 							new PictureCov(zhen,"src\\video\\cameranode"+returnAddr(this)+".jpg").start();
-							if (NodeJPanel.videobutton) {
-								new PictureCov(zhen,"picture\\takenode"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
-								NodeJPanel.videobutton = false;
+							if (NodeJPanel.videoSave) {
+								new PictureCov(zhen,"picture\\takenode"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime4()+".jpg").start();
+								NodeJPanel.videoSave = false;
 							}else 
 							{
-								new PictureCov(zhen,"picture\\node"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime2()+".jpg").start();
+								new PictureCov(zhen,"picture\\node"+returnAddr(this)+"\\cameranode"+TimerMinute.getCurrentTime4()+".jpg").start();
 							}
 							for (int n= 0; n < 60000; n++) {
 									readBuffer[n]=0;
